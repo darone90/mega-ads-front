@@ -1,4 +1,4 @@
-button {
+button, .btn {
     border: 0;
     background-color: #2A913E;
     color: white;
@@ -7,4 +7,12 @@ button {
     padding: 5px 32px;
     font-size: 0.8rem;
     border-radius: 3px;
+    line-height: 22px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+button:hover {
+    cursor: pointer;
+    font-size: 0.85rem;
 }
