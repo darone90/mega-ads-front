@@ -17,7 +17,7 @@ export const SingleAd = (props: Props) => {
 
             setAd(data);
         })()
-    },[])
+    },[props.id])
 
     if (!ad) return <p>Wczytywanie...</p>
 
@@ -27,6 +27,7 @@ export const SingleAd = (props: Props) => {
             <p>{ad.description}</p>
             {ad.price && <p><b>{ad.price} zł</b></p>}
             <a href={ad.url} target="_blank" rel='noreferrer'>Otwórz ogłoszenie</a>
+            <strong>Liczba wyświetleń: {ad.views}</strong>
         </>
     )
 }

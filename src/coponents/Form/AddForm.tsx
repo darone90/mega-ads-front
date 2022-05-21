@@ -68,7 +68,7 @@ export const AddForm = () => {
 
     if(loading) return <h2>Trwa dodawanie ogłoszenia...</h2>
 
-    if(id) return <><h2>Twoje ogłozenie "{form.name}" zostap poprawnie dodane do serwisu. ID towejego ogłoszenia to: {id}</h2><br/>
+    if(id) return <><h2>Twoje ogłozenie "{form.name}" zostało poprawnie dodane do serwisu. Zostanie ono wyświetlone po akceptacji administratora. ID towejego ogłoszenia to: {id}</h2><br/>
                     <Button text={'Dodaj następne ogłoszenie'} func={refresh}/>
                   </>
 
