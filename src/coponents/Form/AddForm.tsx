@@ -2,9 +2,13 @@ import React, {SyntheticEvent, useState} from "react";
 import './AddForm.css';
 import {Button} from "../common/Btn";
 import {geocoding} from "../../utils/geocoding";
+import {Popup} from "./Popup";
+import {urlExist} from "../../utils/urlExist";
+
 
 export const AddForm = () => {
 
+    const [info, setInfo] = useState<string>('');
     const [id, setId] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [form, setForm] = useState({
@@ -30,10 +34,17 @@ export const AddForm = () => {
             const {lat, lon} = await geocoding(form.address)
 
             if(lat === 0 && lon === 0) {
-                updateForm('address', 'Niestety nie udało się określić adresu dla wskazanej lokalizacji');
+                setLoading(false)
+                setInfo('Niestety nie udało się określić lokalizacji dla wskazanego adresu')
                 return;
             }
 
+            const urlcheck = await urlExist(form.url);
+            if(!urlcheck) {
+                setLoading(false)
+                setInfo('Podany adres url nie istnieje lub nie odpowaida')
+                return
+            }
 
             const addRes = await fetch('http://localhost:3030/ad/', {
                 method: 'POST',
@@ -49,9 +60,11 @@ export const AddForm = () => {
 
             const res = await addRes.json();
             setId(res.id);
+            setLoading(false)
 
-        } finally {
-            setLoading(false);
+        } catch (err) {
+            console.log(err);
+            setLoading(false)
         }
     }
 
@@ -73,6 +86,7 @@ export const AddForm = () => {
                   </>
 
     return (
+        <>
         <form action="" className='add-form' onSubmit={save}>
             <h1>Dodwanie ogłoszenia</h1>
             <p>
@@ -109,5 +123,7 @@ export const AddForm = () => {
             </p>
             <Button text={'Zapisz'}/>
         </form>
+            {info ? <Popup text={info}/> : null}
+        </>
     )
 }
