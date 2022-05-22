@@ -4,6 +4,7 @@ import {Button} from "../common/Btn";
 import {geocoding} from "../../utils/geocoding";
 import {Popup} from "./Popup";
 import {urlExist} from "../../utils/urlExist";
+import {ApiConfig} from "../../config/api.config";
 
 
 export const AddForm = () => {
@@ -46,7 +47,7 @@ export const AddForm = () => {
                 return
             }
 
-            const addRes = await fetch('http://localhost:3030/ad/', {
+            const addRes = await fetch(`${ApiConfig.backPath}/ad/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -77,6 +78,7 @@ export const AddForm = () => {
             address: ''
         });
         setId(null);
+        setInfo('');
     }
 
     if(loading) return <h2>Trwa dodawanie ogłoszenia...</h2>

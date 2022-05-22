@@ -1,5 +1,7 @@
+import {ApiConfig} from "../config/api.config";
+
 export const urlExist = async (url: string):Promise<boolean> => {
-    const req = await fetch(`http://localhost:3030/ad/urlcheck/`, {
+    const req = await fetch(`${ApiConfig.backPath}/ad/urlcheck/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

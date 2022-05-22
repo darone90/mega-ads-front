@@ -1,10 +1,12 @@
+import {ApiConfig} from "../config/api.config";
+
 interface geoData {
     lat: number;
     lon: number
 }
 
 export const geocoding = async (address: string):Promise<geoData> => {
-    const geoRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+    const geoRes = await fetch(`${ApiConfig.geoPath}${encodeURIComponent(address)}`);
     const geoData = await geoRes.json();
 
 

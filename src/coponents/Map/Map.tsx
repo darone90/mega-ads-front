@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {SearchContext} from "../../contexts/search.context";
+import {ApiConfig} from "../../config/api.config";
 
 import {SingleAd} from "./SingleAd";
 
@@ -19,7 +20,7 @@ export const Map = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch(`http://localhost:3030/ad/search/${search}`);
+            const res = await fetch(`${ApiConfig.backPath}/ad/search/${search}`);
             const data = await res.json();
 
             setAds(data);

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {ApiConfig} from "../../config/api.config";
 import {AdTypes} from "types";
 
 
@@ -12,7 +13,7 @@ export const SingleAd = (props: Props) => {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch(`http://localhost:3030/ad/${props.id}`);
+            const res = await fetch(`${ApiConfig.backPath}/ad/${props.id}`);
             const data = await res.json();
 
             setAd(data);
