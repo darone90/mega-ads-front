@@ -4,6 +4,6 @@ interface API {
 }
 
 export const ApiConfig: API = {
-    backPath: "http://localhost:3030",
+    backPath: process.env.REACT_APP_API_URL ?? "http://localhost:3030",
     geoPath: `https://nominatim.openstreetmap.org/search?format=json&q=`,
 }
